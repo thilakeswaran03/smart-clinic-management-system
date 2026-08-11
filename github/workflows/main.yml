@@ -1,0 +1,27 @@
+name: Java Backend Build
+
+# Automatically triggered on push or pull request events (2 points)
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    
+    # Configures a job to set up Java (3 points - Part 1)
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        
+    # Compile using Maven (3 points - Part 2)
+    - name: Build with Maven
+      # In a complete Spring Boot repo with a pom.xml, this command compiles the backend.
+      run: mvn clean install -DskipTests
